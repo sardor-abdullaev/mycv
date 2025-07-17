@@ -32,3 +32,9 @@ Content-Type: application/json
 {
     "email":"asd@asd.com"
 }
+
+### Set a color
+GET http://localhost:3000/auth/colors/black
+
+### Get the color
+GET http://localhost:3000/auth/colors

@@ -9,6 +9,7 @@ import {
   Post,
   Query,
   UseInterceptors,
+  Session,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
@@ -20,16 +21,29 @@ import { AuthService } from './auth.service';
 @Controller('auth')
 @Serialize(UserDto)
 export class UsersController {
-  constructor(private userService: UsersService, private authService: AuthService) { }
+  constructor(
+    private userService: UsersService,
+    private authService: AuthService,
+  ) {}
+
+  @Get('/colors/:color')
+  setColor(@Param('color') color: string, @Session() session: any) {
+    session.color = color;
+  }
+
+  @Get('/colors')
+  getColor(@Session() session: any) {
+    return session.color;
+  }
 
   @Post('/signup')
   createUser(@Body() body: CreateUserDto) {
-    return this.authService.signup(body.email, body.password)
+    return this.authService.signup(body.email, body.password);
   }
 
   @Post('/signin')
   signin(@Body() body: CreateUserDto) {
-    return this.authService.signin(body.email, body.password)
+    return this.authService.signin(body.email, body.password);
   }
 
   //   @UseInterceptors(new SerializeInterceptor(UserDto))
