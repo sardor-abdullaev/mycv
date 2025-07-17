@@ -1,4 +1,4 @@
-### Signup
+### Create a new user
 POST http://localhost:3000/auth/signup
 Content-Type:application/json
 
@@ -7,7 +7,7 @@ Content-Type:application/json
      "password":"asdf"
 }
 
-### Signin
+### Sign in as an existing user
 POST http://localhost:3000/auth/signin
 Content-Type:application/json
 
@@ -32,9 +32,3 @@ Content-Type: application/json
 {
     "email":"asd@asd.com"
 }
-
-### Set a color
-GET http://localhost:3000/auth/colors/black
-
-### Get the color
-GET http://localhost:3000/auth/colors
