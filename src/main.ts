@@ -1,10 +1,16 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+const cookieSession = require('cookie-session');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true })) // ensures that there is no extra property inside the body of the request
+  app.use(
+    cookieSession({
+      keys: ['asdfg'],
+    }),
+  );
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true })); // ensures that there is no extra property inside the body of the request
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
